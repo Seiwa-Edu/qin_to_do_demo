@@ -11,6 +11,6 @@ export const config = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-const firebaseApp = initializeApp(config);
-export default firebaseApp;
-const db = getFirestore();
+const app = initializeApp(config);
+export default app;
+export const db = getFirestore(app);
