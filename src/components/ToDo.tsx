@@ -6,6 +6,7 @@ import {
   addDoc,
   updateDoc,
   deleteDoc,
+  doc,
 } from "firebase/firestore";
 import { useAuthContext } from "framework/context/AuthContext";
 import { Button } from "@chakra-ui/react";
@@ -26,8 +27,13 @@ export const ToDo = () => {
   const createToDo = async () => {
     await addDoc(todosCollectionRef, {
       text: text,
-      userId: "users/" + currentUser.id,
+      // userId: currentUser.id,
     });
+  };
+  //削除機能の実装
+  const deleteToDo = async (id) => {
+    const todoDoc = doc(db, "todos", id);
+    await deleteDoc(todoDoc);
   };
   //投稿一覧取得
   useEffect(() => {
@@ -58,6 +64,7 @@ export const ToDo = () => {
             <div>
               <p>{todo.text}</p>
             </div>
+            <button onClick={() => deleteToDo(todo.id)}>削除</button>
             {""}
           </>
         );
