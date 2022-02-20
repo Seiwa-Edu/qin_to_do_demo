@@ -1,5 +1,6 @@
 import { Button } from "@chakra-ui/react";
 import { login, logout } from "framework/firebase/auth";
+import UserInfo from "components/UserInfo";
 
 type BaseButtonProps = {
   text: string;
@@ -21,7 +22,10 @@ const BaseButton: React.FC<BaseButtonProps> = (props) => (
 const LoginButton = () => <BaseButton onclick={() => login()} text="LOGIN" />;
 
 const LogoutButton = () => (
-  <BaseButton onclick={() => logout()} text="LOGOUT" />
+  <>
+    <BaseButton onclick={() => logout()} text="LOGOUT" />
+    <UserInfo />
+  </>
 );
 
 export { BaseButton, LoginButton, LogoutButton };
